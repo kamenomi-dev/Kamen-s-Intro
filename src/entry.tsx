@@ -1,17 +1,21 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 
-import { ThemeProvider } from "./providers/themeProvider";
-
 import "./i18nInit";
 
-const Main = () => <ThemeProvider></ThemeProvider>;
+import { ThemeProvider } from "./providers/themeProvider";
 
-// Server Side Render.
+import { PageFrame } from "./pageFrame";
+
+import "./styles/layout.less";
+
+// Client Side Render.
 const root = createRoot(document.getElementById("app")!);
 
 root.render(
   <StrictMode>
-    <Main />
+    <ThemeProvider>
+      <PageFrame></PageFrame>
+    </ThemeProvider>
   </StrictMode>
 );
