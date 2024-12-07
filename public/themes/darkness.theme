@@ -1,0 +1,5 @@
+<Theme from="./providers/ThemeProvider.tsx">
+    <ColorTable>
+        <Background></Background>
+    </ColorTable>
+</Theme>
