@@ -1,8 +1,12 @@
-import { type ReactNode, type FunctionComponent } from "react";
+import {
+  type ReactNode,
+  type FunctionComponent,
+  type MouseEventHandler,
+} from "react";
 
 type Titem = {
   content: ReactNode;
-  callback?: Function;
+  callback?: MouseEventHandler;
 
   freezed?: boolean;
   disabled?: boolean;
@@ -10,18 +14,23 @@ type Titem = {
 
 interface IProps {
   items: Titem[];
+  style?: "transparent";
+  headPicture?: string
 }
 
-export const Navigation: FunctionComponent<IProps> = ({ items }) => {
+export const Navigation: FunctionComponent<IProps> = ({ items, style, headPicture }) => {
   return (
-    <div id="Navigation">
+    <div id="Navigation" className={style ? "style-" + style : undefined}>
+      {headPicture && <img title="head image" src={headPicture}/>}
       {items.map((item, index) => (
-        <div
-          id={`NavigationItem-${index.toString()}`}
-          key={`NavigationItem-${index.toString()}`}
+        <button
+          id={"NavigationItem-" + String(index)}
+          key={"NavigationItem-" + String(index)}
+          type="button"
+          onClick={item.callback}
         >
           {item.content}
-        </div>
+        </button>
       ))}
     </div>
   );

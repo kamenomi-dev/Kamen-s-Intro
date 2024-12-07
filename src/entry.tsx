@@ -1,7 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 
-import "./i18nInit";
+import "./utils/internationalization";
 
 import { ThemeProvider } from "./providers/themeProvider";
 
@@ -14,7 +14,7 @@ const root = createRoot(document.getElementById("app")!);
 
 root.render(
   <StrictMode>
-    <ThemeProvider>
+    <ThemeProvider themeFilePath="../themes">
       <PageFrame></PageFrame>
     </ThemeProvider>
   </StrictMode>

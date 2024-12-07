@@ -1,7 +1,0 @@
-<Theme from="./providers/ThemeProvider.tsx">
-    <ColorTable>
-        <Background>
-            <Body>#2F3032</Body>
-        </Background>
-    </ColorTable>
-</Theme>

@@ -7,18 +7,15 @@ import React, {
   useState,
 } from "react";
 
-import axios from "axios";
-import { XMLParser } from "fast-xml-parser";
+import "less"
 
 type TSupportTheme = "lightness" | "darkness";
 
-interface IContext<Theme = Record<string, any>> {
+interface IContext {
   currentTheme: TSupportTheme;
-  currentThemeValue: Theme;
 
   GetCurrentTheme: () => string;
   SetCurrentTheme: (theme: TSupportTheme) => void;
-  GetCurrentThemeValue: () => Theme;
 }
 
 const context = createContext<IContext | undefined>(undefined);
@@ -28,22 +25,16 @@ interface IProps {
   themeFilePath?: string;
 }
 
-interface IState {
-  currentTheme: TSupportTheme;
-  currentThemeValue: object;
-}
-
 function __IsBroswerThemeLightness() {
   return window.matchMedia("(prefers-color-scheme: light)").matches;
 }
 
 function __AdaptBroswerTheme(
-  this: React.Dispatch<React.SetStateAction<IState>>,
-  themePath: string
+  Setter: React.Dispatch<React.SetStateAction<TSupportTheme>>,
 ) {
   const themeListener = window.matchMedia("(prefers-color-scheme: light)");
   const listener = ({ matches }: { matches: boolean }) => {
-    SetWebsiteTheme.bind(this)(themePath, matches ? "lightness" : "darkness");
+    Setter(matches ? "lightness" : "darkness");
   };
 
   themeListener.addEventListener("change", listener);
@@ -52,90 +43,39 @@ function __AdaptBroswerTheme(
   };
 }
 
-async function SetWebsiteTheme(
-  this: React.Dispatch<React.SetStateAction<IState>>,
-  themeFilePath: string,
-  theme: TSupportTheme
-) {
-  const themeValue = await axios.get(`${themeFilePath}/${theme}.theme`, {
-    transformResponse: function (data, _headers, status) {
-      // OK or 301, 302, etc.
-      if (status && status != 200 && !(300 <= status && status <= 400)) {
-        throw new Error(`Not found the theme: ${theme}!`);
-      }
-
-      if (typeof data == "string") {
-        try {
-          console.log(new XMLParser().parse(data));
-          return { type: "xml", theme: new XMLParser().parse(data)["Theme"] };
-        } catch (err) {
-          try {
-            return { type: "json", theme: JSON.parse(data) };
-          } catch (err) {}
-        }
-      }
-
-      throw new Error(`Cannot load the theme: ${theme}!`);
-    },
-  });
-
-  const { data, status } = themeValue;
-
-  if (status != 200 && !(300 <= status && status <= 400)) {
-    throw new Error(`Cannot request the theme: ${theme}!`);
-  }
-
-  if (typeof data != "object") {
-    throw new Error(`Cannot load the theme: ${theme}! That's not json file.`);
-  }
-
-  this({
-    currentTheme: theme,
-    currentThemeValue: data,
-  });
-}
-
 export const ThemeProvider: FunctionComponent<IProps> = ({
   children,
   themeFilePath,
 }) => {
   themeFilePath ||= "/themes";
 
-  const [currentState, SetCurrentState] = useState<IState>({
-    currentTheme: __IsBroswerThemeLightness() ? "lightness" : "darkness",
-    currentThemeValue: {},
-  });
+  const [currentTheme, SetCurrentTheme] = useState<TSupportTheme>(
+    __IsBroswerThemeLightness() ? "lightness" : "darkness"
+  );
 
-  useEffect(__AdaptBroswerTheme.bind(SetCurrentState, themeFilePath), []);
-
-  const { currentTheme, currentThemeValue } = currentState;
-
-  if (!currentThemeValue || Object.keys(currentThemeValue).length == 0) {
-    SetWebsiteTheme.bind(SetCurrentState)(themeFilePath, currentTheme);
-  }
-
+  useEffect(() => __AdaptBroswerTheme(SetCurrentTheme), []);
+  // import(themeFilePath + "/" + currentTheme + ".less")
   return (
     <context.Provider
       value={{
         currentTheme,
-        currentThemeValue: currentThemeValue,
         GetCurrentTheme: () => currentTheme,
         SetCurrentTheme: (theme: TSupportTheme) => {
-          SetWebsiteTheme.bind(SetCurrentState)(themeFilePath, theme);
+          SetCurrentTheme(theme);
         },
-        GetCurrentThemeValue: () => currentThemeValue,
       }}
     >
-      {children}1
+      <link rel="stylesheet" href={themeFilePath + "/" + currentTheme + ".css"} />
+      {children}
     </context.Provider>
   );
 };
 
-export function useTheme<Theme>() {
+export function useTheme() {
   const contextValue = useContext(context);
   if (contextValue == undefined) {
     throw new Error(`Function "useTheme" must be used within a ThemeProvider!`);
   }
 
-  return contextValue as IContext<Theme>;
+  return contextValue;
 }

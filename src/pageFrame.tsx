@@ -8,10 +8,6 @@ import {
 import { LoadingScreen } from "./components/loadingScreen";
 import { Navigation } from "./components/navigation";
 
-import { useTheme } from "./providers/themeProvider";
-
-import i18next from "./i18nInit";
-
 interface ITheme {
   theme: {
     ColorTable: {
@@ -30,20 +26,17 @@ export const PageFrame: FunctionComponent<IProps> = ({ children }) => {
   const [isLoaded, EmitLoaded] = useState<boolean>(false);
 
   useEffect(() => {
-    i18next.then(() => {
-      EmitLoaded(true);
-    });
+    const listener = () => setTimeout(() => EmitLoaded(true), 500);
+    window.addEventListener("load", listener);
+
+    return () => window.removeEventListener("load", listener);
   }, []);
-
-  const { theme } = useTheme<ITheme>().GetCurrentThemeValue();
-
-  document.body.style.backgroundColor = theme?.ColorTable?.Background?.Body;
 
   return (
     <>
-      {!isLoaded && <LoadingScreen />}
+      <LoadingScreen isLoaded={isLoaded} />
       <div id="Page">
-        <Navigation items={[{ content: "112233" }]} />
+        <Navigation style="transparent" items={[{ content: "112233" }]} headPicture="./favicon.ico" />
         {children}
       </div>
     </>
