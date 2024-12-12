@@ -12,16 +12,6 @@ import { Navigation } from "./components/navigation";
 
 import _ from "lodash";
 
-interface ITheme {
-  theme: {
-    ColorTable: {
-      Background: {
-        Body: string;
-      };
-    };
-  };
-}
-
 interface IProps {
   children?: ReactNode;
 }

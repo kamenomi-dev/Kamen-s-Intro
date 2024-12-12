@@ -6,7 +6,6 @@ import "./utils/internationalization";
 import { ThemeProvider } from "./providers/themeProvider";
 
 import { PageFrame } from "./pageFrame";
-import { LoadingSymbol } from "./components/loadingSymbol";
 
 import "./styles/layout.less";
 
