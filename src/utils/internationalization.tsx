@@ -13,5 +13,4 @@ export default i18next
     backend: {
       loadPath: "/languages/{{lng}}.json",
     },
-    cleanCode: true,
   });

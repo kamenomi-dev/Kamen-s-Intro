@@ -5,8 +5,12 @@ import {
   useState,
 } from "react";
 
+import { useTranslation } from "react-i18next";
+
 import { LoadingScreen } from "./components/loadingScreen";
 import { Navigation } from "./components/navigation";
+
+import _ from "lodash";
 
 interface ITheme {
   theme: {
@@ -26,17 +30,16 @@ export const PageFrame: FunctionComponent<IProps> = ({ children }) => {
   const [isLoaded, EmitLoaded] = useState<boolean>(false);
 
   useEffect(() => {
-    const listener = () => setTimeout(() => EmitLoaded(true), 500);
-    window.addEventListener("load", listener);
-
-    return () => window.removeEventListener("load", listener);
+    setTimeout(() => EmitLoaded(true), 500);
   }, []);
+
+  const {t} = useTranslation();
 
   return (
     <>
       <LoadingScreen isLoaded={isLoaded} />
       <div id="Page">
-        <Navigation style="transparent" items={[{ content: "112233" }]} headPicture="./favicon.ico" />
+        <Navigation style="transparent" items={[{ content: t("navigation.content.home") }]} headPicture="./favicon.ico" />
         {children}
       </div>
     </>

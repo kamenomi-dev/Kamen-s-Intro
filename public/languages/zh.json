@@ -1,3 +1,7 @@
 {
-  "main": "面"
+  "website.title.home": "",
+  "navigation.content.home": "主页",
+  "navigation.content.article": "文章",
+  "navigation.content.blogroll": "友链",
+  "navigation.content.about": "关于"
 }
