@@ -12,10 +12,9 @@ export const LoadingScreen: FunctionComponent<IProps> = ({ isLoaded }) => {
   return (
     <div
       id="LoadingScreen"
-      className={isLoaded ? "Hidden" : undefined}
       style={{
-        color: "white",
-        backgroundColor: "#444B56",
+        top: isLoaded ? "-100%" : undefined,
+        opacity: isLoaded ? "0" : undefined,
       }}
     >
       <div id="Content">
@@ -23,7 +22,7 @@ export const LoadingScreen: FunctionComponent<IProps> = ({ isLoaded }) => {
         <br />
         海内存知己，天涯若比邻。
         <LoadingSymbol />
-        </div>
+      </div>
     </div>
   );
 };

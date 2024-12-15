@@ -14,19 +14,28 @@ type Titem = {
 
 interface IProps {
   items: Titem[];
-  style?: "transparent";
-  headPicture?: string
+  headPicture?: string;
+  isTransparent?: boolean;
 }
 
-export const Navigation: FunctionComponent<IProps> = ({ items, style, headPicture }) => {
+export const Navigation: FunctionComponent<IProps> = ({
+  items,
+  headPicture,
+  isTransparent,
+}) => {
   return (
-    <div id="Navigation" className={style ? "style-" + style : undefined}>
-      {headPicture && <img title="head image" src={headPicture}/>}
+    <div
+      id="Navigation"
+      style={{
+        backgroundColor: isTransparent ? "transparent" : undefined
+      }}
+    >
+      {headPicture && <img title="head image" src={headPicture} />}
       {items.map((item, index) => (
         <button
-          id={"NavigationItem-" + String(index)}
           key={"NavigationItem-" + String(index)}
           type="button"
+          className="hover:bg-navigation-item-hover active:bg-navigation-item-active"
           onClick={item.callback}
         >
           {item.content}

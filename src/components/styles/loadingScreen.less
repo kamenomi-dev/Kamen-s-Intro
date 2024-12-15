@@ -1,4 +1,5 @@
 #LoadingScreen {
+  @apply ~"general-font-clr bg-gray-85 dark:bg-gray-20";
   z-index: 10;
 
   position: absolute;
@@ -6,11 +7,6 @@
   left: 0;
   width: 100%;
   height: 100%;
-
-  &.Hidden {
-    top: -100%;
-    opacity: 0;
-  }
 
   > #Content {
     text-align: center;
@@ -22,10 +18,8 @@
       position: relative;
       top: 20vh;
       margin: auto;
-         transform: scaleY(0.8);
     }
 
     transform: translate(-50%, -50%);
- 
   }
 }

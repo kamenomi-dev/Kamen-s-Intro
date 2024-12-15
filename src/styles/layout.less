@@ -1,6 +1,18 @@
-* {
-  color: var(--ColorTable-Font);
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
+.unselectable {
+  -webkit-user-select: none;
+  -moz-user-select: -moz-none;
+  user-select: none;
+}
+
+.general-font-clr {
+  @apply ~"text-black dark:text-white";
+}
+
+* {
   margin: 0;
   padding: 0;
 
@@ -10,12 +22,6 @@
 
 body {
   background-color: var(--ColorTable-Background-Body);
-}
-
-.Unselectable {
-  -webkit-user-select:none;
-  -moz-user-select: -moz-none;
-  user-select: none;
 }
 
 @media only screen and (max-width: 767px) {

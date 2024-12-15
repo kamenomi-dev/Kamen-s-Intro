@@ -29,7 +29,7 @@ export const PageFrame: FunctionComponent<IProps> = ({ children }) => {
     <>
       <LoadingScreen isLoaded={isLoaded} />
       <div id="Page">
-        <Navigation style="transparent" items={[{ content: t("navigation.content.home") }]} headPicture="./favicon.ico" />
+        <Navigation isTransparent={true} items={[{ content: t("navigation.content.home") }]} headPicture="./favicon.ico" />
         {children}
       </div>
     </>
