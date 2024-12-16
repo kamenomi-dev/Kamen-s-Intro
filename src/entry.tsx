@@ -3,8 +3,6 @@ import { createRoot } from "react-dom/client";
 
 import "./utils/internationalization";
 
-import { ThemeProvider } from "./providers/themeProvider";
-
 import { PageFrame } from "./pageFrame";
 
 import "./styles/layout.less";
@@ -15,10 +13,8 @@ const root = createRoot(document.getElementById("app")!);
 
 root.render(
   <StrictMode>
-    <ThemeProvider themeFilePath="../themes">
       <PageFrame>
         
       </PageFrame>
-    </ThemeProvider>
   </StrictMode>
 );

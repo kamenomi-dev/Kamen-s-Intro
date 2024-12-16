@@ -25,8 +25,8 @@ export default {
         },
       },
       backgroundColor: {
-        "navigation-item-hover": "#3b3b3b62",
-        "navigation-item-active": "#ffffff1C",
+        "navigation-item-normal": "white",
+        "navigation-item-active": "#ffffffA2",
       },
     },
   },
