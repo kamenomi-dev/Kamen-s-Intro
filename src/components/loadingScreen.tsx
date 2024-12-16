@@ -1,4 +1,4 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 
 import _ from "lodash";
 
@@ -9,12 +9,23 @@ interface IProps {
 }
 
 export const LoadingScreen: FunctionComponent<IProps> = ({ isLoaded }) => {
+  const [isSlidOut, SetSlidOut] = useState(false);
+
+  useEffect(() => {
+    if (!isLoaded) {
+      return;
+    }
+
+    setTimeout(() => {
+      SetSlidOut(true);
+    }, 2000);
+  }, [isLoaded]);
   return (
     <div
       id="LoadingScreen"
       style={{
-        top: isLoaded ? "-100%" : undefined,
-        opacity: isLoaded ? "0" : undefined,
+        top: isSlidOut ? "-100%" : undefined,
+        opacity: isSlidOut ? "0" : undefined,
       }}
     >
       <div id="Content">
