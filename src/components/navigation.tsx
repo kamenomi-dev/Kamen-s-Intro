@@ -1,44 +1,37 @@
-import {
-  type ReactNode,
-  type FunctionComponent,
-  type MouseEventHandler,
-} from "react";
+import { ReactNode, FunctionComponent, MouseEventHandler } from "react";
 
-type Titem = {
-  content: ReactNode;
+type NavigationItem = {
+  label: ReactNode;
   callback?: MouseEventHandler;
-
-  freezed?: boolean;
-  disabled?: boolean;
+  freezed?: boolean; // Unused in current implementation; consider removing if unnecessary
+  disabled?: boolean; // Unused in current implementation; consider removing if unnecessary
 };
 
-interface IProps {
-  items: Titem[];
+interface NavigationProps {
+  items: NavigationItem[];
   logoImage?: string;
-  isTransparent?: boolean;
+  transparent?: boolean;
 }
 
-export const Navigation: FunctionComponent<IProps> = ({
+export const Navigation: FunctionComponent<NavigationProps> = ({
   items,
   logoImage,
-  isTransparent,
+  transparent = false,
 }) => {
   return (
     <div
       id="Navigation"
-      style={{
-        backgroundColor: isTransparent ? "transparent" : undefined
-      }}
+      style={{ backgroundColor: transparent ? "transparent" : "inherit" }}
     >
-      {logoImage && <img title="Logo" src={logoImage} />}
-      {items.map((item, index) => (
+      {logoImage && <img title="Logo" src={logoImage} alt="Logo" />}
+      {items.map(({ label, callback }, index) => (
         <button
-          key={"NavigationItem-" + String(index)}
+          key={`NavigationItem-${index}`}
           type="button"
           className="after:bg-navigation-item-normal after:active:bg-navigation-item-active"
-          onClick={item.callback}
+          onClick={callback}
         >
-          {item.content}
+          {label}
         </button>
       ))}
     </div>

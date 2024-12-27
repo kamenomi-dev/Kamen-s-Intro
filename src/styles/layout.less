@@ -8,20 +8,14 @@
   user-select: none;
 }
 
-.general-font-clr {
-  @apply ~"text-black dark:text-white";
-}
-
 * {
+  @apply ~"text-white";
+
   margin: 0;
   padding: 0;
 
   /* Debug */
   transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-}
-
-body {
-  background-color: var(--ColorTable-Background-Body);
 }
 
 @media only screen and (max-width: 767px) {
