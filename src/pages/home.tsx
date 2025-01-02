@@ -1,3 +1,7 @@
-export const Home: React.FunctionComponent = () => {
-  return <>does it rendered???</>;
+import "./styles/home.sass";
+
+const Home: React.FunctionComponent = () => {
+  return <></>;
 };
+
+export default Home;

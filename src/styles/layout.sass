@@ -1,0 +1,21 @@
+@use 'tailwindcss/base'
+@use 'tailwindcss/components'
+@use 'tailwindcss/utilities'
+
+@use './desktop.sass'
+
+.unselectable 
+  -webkit-user-select: none
+  -moz-user-select: -moz-none
+  user-select: none
+
+
+* 
+  @apply text-white
+
+  margin: 0
+  padding: 0
+
+  /* Debug */
+  transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1)
+

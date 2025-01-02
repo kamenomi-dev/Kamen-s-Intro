@@ -1,3 +1,5 @@
+import loadingSymbol from "./tailwindcss/loadingSymbol.json";
+
 /** @type {import('tailwindcss').Config} */
 
 export default {
@@ -24,10 +26,7 @@ export default {
           90: "#E2E3E0",
         },
       },
-      backgroundColor: {
-        "navigation-item-normal": "white",
-        "navigation-item-active": "#ffffffA2",
-      },
+      ...loadingSymbol
     },
   },
   plugins: [],

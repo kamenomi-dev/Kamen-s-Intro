@@ -1,3 +1,5 @@
-export const About: React.FunctionComponent = () => {
+const About: React.FunctionComponent = () => {
   return <>about</>;
 };
+
+export default About;

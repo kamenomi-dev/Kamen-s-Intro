@@ -21,14 +21,19 @@ export const Navigation: FunctionComponent<NavigationProps> = ({
   return (
     <div
       id="Navigation"
-      style={{ backgroundColor: transparent ? "transparent" : "inherit" }}
+      className={"z-10 " + transparent ? "bg-transparent" : "bg-gray-15"}
     >
-      {logoImage && <img title="Logo" src={logoImage} alt="Logo" />}
+      {logoImage && (
+        <img
+          alt="Logo"
+          title="Logo"
+          src={logoImage}
+        />
+      )}
       {items.map(({ label, callback }, index) => (
         <button
           key={`NavigationItem-${index}`}
           type="button"
-          className="after:bg-navigation-item-normal after:active:bg-navigation-item-active"
           onClick={callback}
         >
           {label}

@@ -30,9 +30,13 @@ export default defineConfig({
     sourcemap: false,
   },
   css: {
+    preprocessorOptions: {
+      sass: {
+        api: "modern-compiler" 
+      }
+    },
     postcss: {
       plugins: [tailwindcss(), autoprefixer()],
     },
   },
-
 });

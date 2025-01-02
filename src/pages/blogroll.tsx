@@ -1,3 +1,5 @@
-export const Blogroll: React.FunctionComponent = () => {
+const Blogroll: React.FunctionComponent = () => {
   return <>blogroll</>;
 };
+
+export default Blogroll;

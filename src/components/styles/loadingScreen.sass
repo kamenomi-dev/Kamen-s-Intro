@@ -1,0 +1,10 @@
+#LoadingScreen
+  @apply z-10 absolute left-0 w-full h-full bg-gray-20
+
+  > #Content
+    @apply absolute top-1/2 left-1/2 text-center transform -translate-y-1/2 -translate-x-1/2
+
+    > #LoadingSymbol
+      @apply relative top-20 mx-auto
+
+  transition: all 0.2s ease-in

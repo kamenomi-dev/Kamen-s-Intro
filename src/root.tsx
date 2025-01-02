@@ -10,11 +10,16 @@ import {
 import { useTranslation } from "react-i18next";
 
 import "./utils/internationalization";
-import "./styles/layout.less";
+import "./styles/layout.sass";
 
 import { LoadingScreen } from "./components/loadingScreen";
 import { Navigation } from "./components/navigation";
-import { Error, Home, Article, Blogroll, About } from "./pages";
+
+const Home = React.lazy(() => import("./pages/home"));
+const About = React.lazy(() => import("./pages/about"));
+const Error = React.lazy(() => import("./pages/error"));
+const Article = React.lazy(() => import("./pages/article"));
+const Blogroll = React.lazy(() => import("./pages/blogroll"));
 
 const Frame: React.FunctionComponent = () => {
   const { t } = useTranslation();
@@ -29,8 +34,6 @@ const Frame: React.FunctionComponent = () => {
 
   return (
     <>
-      <title>{t("website.title.home")}</title>
-      <LoadingScreen />
       <div id="Page">
         <Navigation
           transparent
@@ -48,14 +51,18 @@ const Frame: React.FunctionComponent = () => {
 
 export const Root: React.FunctionComponent = () => (
   <BrowserRouter>
-    <Routes>
-      <Route element={<Frame />} errorElement={<Error />}>
-        <Route index element={<Home />} />
-        <Route path="article" element={<Article />} />
-        <Route path="blogroll" element={<Blogroll />} />
-        <Route path="about" element={<About />} />
-      </Route>
-    </Routes>
+    <React.Suspense fallback={<LoadingScreen />}>
+      <Routes>
+        <Route errorElement={<Error />}>
+          <Route path="/" element={<Frame />}>
+            <Route index element={<Home />} />
+            <Route path="article" element={<Article />} />
+            <Route path="blogroll" element={<Blogroll />} />
+            <Route path="about" element={<About />} />
+          </Route>
+        </Route>
+      </Routes>
+    </React.Suspense>
   </BrowserRouter>
 );
 
