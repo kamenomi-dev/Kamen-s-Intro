@@ -1,8 +1,5 @@
 import { FunctionComponent } from "react";
-
-import _ from "lodash";
-
-import { LoadingSymbol } from "./loadingSymbol";
+import { LoadingSymbol } from "./components/loadingSymbol";
 
 export const LoadingScreen: FunctionComponent = () => {
   return (

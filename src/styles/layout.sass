@@ -2,13 +2,23 @@
 @use 'tailwindcss/components'
 @use 'tailwindcss/utilities'
 
-@use './desktop.sass'
+@use '../styles/loading.sass'
+@use '../components/styles/loadingSymbol.sass'
+@use '../components/styles/turntable.sass'
+@use '../components/styles/navigation.sass'
+
+#Page
+  position: relative
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  min-height: 100vh
 
 .unselectable 
   -webkit-user-select: none
   -moz-user-select: -moz-none
   user-select: none
-
 
 * 
   @apply text-white

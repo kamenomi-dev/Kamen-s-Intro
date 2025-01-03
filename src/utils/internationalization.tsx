@@ -9,7 +9,7 @@ export default i18next
   .use(initReactI18next)
   .init({
     lng: navigator.language,
-    load: "languageOnly",
+    load: "all",
     backend: {
       loadPath: "/languages/{{lng}}.json",
     },
