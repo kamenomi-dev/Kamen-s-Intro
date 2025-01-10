@@ -1,5 +1,6 @@
 export * from "./error.tsx"
 export * from "./home.tsx"
-export * from "./article.tsx"
+export * from "./contact.tsx"
 export * from "./blogroll.tsx"
 export * from "./about.tsx"
+export * from "./original-character.tsx"

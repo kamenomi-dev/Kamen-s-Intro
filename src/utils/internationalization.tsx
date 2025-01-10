@@ -13,4 +13,8 @@ export default i18next
     backend: {
       loadPath: "/languages/{{lng}}.json",
     },
+
+    overloadTranslationOptionHandler: (args: string[]) => {
+      return { defaultValue: "" };
+    },
   });

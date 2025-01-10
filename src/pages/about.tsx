@@ -1,5 +1,14 @@
-const About: React.FunctionComponent = () => {
-  return <>about</>;
-};
+import { Helmet } from "react-helmet";
+import { useTranslation } from "react-i18next";
 
-export default About;
+export const About: React.FunctionComponent = () => {
+  const { t } = useTranslation();
+
+  return (
+    <>
+      <Helmet>
+        <title>{t("website.title.about")}</title>
+      </Helmet>
+    </>
+  );
+};

@@ -1,7 +1,20 @@
 {
-  "website.title.home": "👨‍💻 KamenDev",
-  "navigation.content.home": "主页",
-  "navigation.content.article": "文章",
-  "navigation.content.blogroll": "友链",
-  "navigation.content.about": "关于"
+  "website.title.error": "👨‍💻 KamenDev - !错误! {0}",
+  "website.title.home": "👨‍💻 KamenDev - 主页",
+  "website.title.contact": "👨‍💻 KamenDev - 联系",
+  "website.title.blogroll": "👨‍💻 KamenDev - 友链",
+  "website.title.about": "👨‍💻 KamenDev - 关于",
+
+  "website.title.original-character": "👨‍💻 KamenDev - 个人设定说明",
+
+  "navigation.label.home": "主页",
+  "navigation.label.contact": "联系",
+  "navigation.label.blogroll": "友链",
+  "navigation.label.about": "关于",
+
+  "navigation.description.logo": "网站徽标",
+  "navigation.description.home": "返回到主页",
+  "navigation.description.contact": "与开发者取得联系",
+  "navigation.description.blogroll": "同开发者相互进步",
+  "navigation.description.about": "有关开发者留下的信息"
 }

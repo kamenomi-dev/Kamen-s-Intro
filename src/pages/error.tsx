@@ -1,7 +1,8 @@
-const Error: React.FunctionComponent = () => {
-  return <>
-    What the hell~
-  </>
-}
+import { useRouteError } from "react-router";
 
-export default Error;
+export const Error: React.FunctionComponent = () => {
+  const error = useRouteError();
+
+  console.log("I Set", error);
+  return <>What the hell~</>;
+};

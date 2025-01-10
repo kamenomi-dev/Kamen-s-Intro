@@ -5,5 +5,5 @@
  */
 
 export const LoadingSymbol: React.FunctionComponent<{}> = () => {
-  return <div id="LoadingSymbol" />
+  return <div className="LoadingSymbol" />
 }

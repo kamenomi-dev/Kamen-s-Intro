@@ -1,13 +1,14 @@
-#Navigation
-  @apply flex flex-row flex-nowrap top-0 h-14 w-full
+.Navigation
+  @apply z-10 relative flex flex-row flex-nowrap top-0 h-14 w-full bg-gray-30/90 backdrop-blur-lg
+
+  &[x-extended-attribute~=background-transparent]
+    @apply bg-transparent
 
   > img
-    @apply rounded-full size-10 my-2 ml-4
+    @apply rounded-full size-10 my-2 ml-6 select-none
 
-  > button
-    @apply mx-3 text-base basis-32
-
-    @apply after:bg-white after:active:bg-[#ffffffa2] // 伪元素样式
+  > a, button
+    @apply pb-0.5 mx-3 my-auto -top-1/2 text-base basis-32 text-center
 
     &:hover
       cursor: pointer
@@ -16,7 +17,7 @@
         @apply w-1/2 left-1/4
 
     &::after
-      @apply content-[''] block relative top-1 h-px w-0 left-1/2 // 默认伪元素样式
+      @apply content-[''] block relative top-1 h-px w-0 left-1/2 bg-white active:bg-[#ffffffa2]
 
       transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1)
 
