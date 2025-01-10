@@ -1,6 +1,6 @@
 import React from "react";
 import { Outlet } from "react-router";
-import { useTranslation } from "react-i18next";
+// import { useTranslation } from "react-i18next";
 
 import { Edit } from "./components";
 import { SlMagnifier } from "react-icons/sl";
@@ -10,14 +10,14 @@ export interface IFrameContext {
 }
 
 export const Frame: React.FunctionComponent = () => {
-  const { t } = useTranslation();
+  // const { t } = useTranslation();
 
-  const navItems = [
-    { label: t("navigation.content.home"), path: "/" },
-    { label: t("navigation.content.article"), path: "/article" },
-    { label: t("navigation.content.blogroll"), path: "/blogroll" },
-    { label: t("navigation.content.about"), path: "/about" },
-  ];
+  // const navItems = [
+  //   { label: t("navigation.content.home"), path: "/" },
+  //   { label: t("navigation.content.article"), path: "/article" },
+  //   { label: t("navigation.content.blogroll"), path: "/blogroll" },
+  //   { label: t("navigation.content.about"), path: "/about" },
+  // ];
 
   return (
     <>
