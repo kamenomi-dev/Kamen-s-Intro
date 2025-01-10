@@ -1,10 +1,16 @@
+import React from "react";
+import { Outlet } from "react-router";
 import { useTranslation } from "react-i18next";
-import { useNavigate, Outlet } from "react-router";
-import { Navigation } from "./components/navigation";
 
-const Frame: React.FunctionComponent = () => {
+import { Edit } from "./components";
+import { SlMagnifier } from "react-icons/sl";
+
+export interface IFrameContext {
+  applyFrontPageElement: (element: React.ReactElement) => void;
+}
+
+export const Frame: React.FunctionComponent = () => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
 
   const navItems = [
     { label: t("navigation.content.home"), path: "/" },
@@ -15,19 +21,28 @@ const Frame: React.FunctionComponent = () => {
 
   return (
     <>
-      <div id="Page">
-        <Navigation
-          transparent
-          logoImage="./logo-40x40.png"
-          items={navItems.map(({ label, path }) => ({
-            label: label,
-            callback: () => navigate(path),
-          }))}
-        />
+      <header id="horizontal-header">
+        <div className="titleArea">
+          <h2>Kamenomi</h2>
+        </div>
+        <form className="searchArea" action="/search">
+          <Edit
+            id="searchInput"
+            name="target"
+            title="键入所想寻求的内容"
+            buttonProps={{
+              icon: <SlMagnifier />,
+              type: "submit"
+            }}
+          />
+        </form>
+        <div className="toolArea">开发当中</div>
+      </header>
+      <nav id="vertical-sidebar"></nav>
+      <div id="content">
         <Outlet />
+        123
       </div>
     </>
   );
 };
-
-export default Frame;

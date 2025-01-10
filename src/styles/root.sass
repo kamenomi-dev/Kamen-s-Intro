@@ -1,0 +1,34 @@
+*
+  @apply text-white m-0 p-0 transition-all
+
+body
+  @apply bg-gray-15
+
+header#horizontal-header
+  @apply border-0 border-solid border-b-[1px] border-b-gray-20
+
+  @apply grid grid-cols-3 content-center items-center justify-center
+
+  @apply z-10 px-5 py-2 fixed top-0 left-0 right-0 h-10 bg-gray-25
+
+  div.titleArea
+    @apply select-none
+  
+  form.searchArea
+    @apply h-full
+
+  div.toolArea
+    @apply select-none ml-auto
+
+nav#vertical-sidebar
+  @apply z-10 fixed top-14 left-0 w-64 h-full bg-gray-25
+
+div#content
+  @apply pt-14 pl-64
+
+@media screen and (max-width: 1000px)
+  nav#vertical-sidebar
+    @apply w-56
+
+  div#content
+    @apply pl-56
