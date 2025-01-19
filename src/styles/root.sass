@@ -1,34 +1,46 @@
+@use "tailwindcss/base"
+
+@use "tailwindcss/components"
+
+@use "tailwindcss/utilities"
+
 *
   @apply text-white m-0 p-0 transition-all
 
 body
-  @apply bg-gray-15
+  @apply pb-8 bg-gray-15
 
 header#horizontal-header
-  @apply border-0 border-solid border-b-[1px] border-b-gray-20
+  // @apply border-0 border-solid border-b-[1px] border-b-gray-20/10
 
-  @apply grid grid-cols-3 content-center items-center justify-center
+  @apply z-10 px-5 py-2 fixed top-0 left-0 right-0 h-14
 
-  @apply z-10 px-5 py-2 fixed top-0 left-0 right-0 h-10 bg-gray-25
+  div
+    @apply leading-10
 
-  div.titleArea
-    @apply select-none
-  
-  form.searchArea
-    @apply h-full
+    &#navigation-area
+      @apply inline-flex relative select-none
 
-  div.toolArea
-    @apply select-none ml-auto
+    a
+      @apply mx-2.5 relative w-10 h-10 rounded-full
 
-nav#vertical-sidebar
-  @apply z-10 fixed top-14 left-0 w-64 h-full bg-gray-25
+      > svg
+        @apply size-6 m-2
 
-div#content
-  @apply pt-14 pl-64
+      &#redirect-home
+        @apply mx-3.5
 
-@media screen and (max-width: 1000px)
-  nav#vertical-sidebar
-    @apply w-56
+    &#tool-area
+      @apply float-right inline-flex relative select-none
 
-  div#content
-    @apply pl-56
+footer
+  @apply h-8
+
+
+// Base Element
+
+h1
+  @apply text-5xl
+
+mark
+  @apply inline-block bg-[length:auto_50%] bg-slate-500/25

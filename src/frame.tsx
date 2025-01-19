@@ -1,48 +1,40 @@
 import React from "react";
-import { Outlet } from "react-router";
-// import { useTranslation } from "react-i18next";
+import { Outlet, NavLink } from "react-router";
 
-import { Edit } from "./components";
-import { SlMagnifier } from "react-icons/sl";
+import { BiLinkAlt, BiInfoCircle, BiLogoGithub } from "react-icons/bi";
 
-export interface IFrameContext {
-  applyFrontPageElement: (element: React.ReactElement) => void;
-}
+import { Image } from "./components";
 
 export const Frame: React.FunctionComponent = () => {
-  // const { t } = useTranslation();
-
-  // const navItems = [
-  //   { label: t("navigation.content.home"), path: "/" },
-  //   { label: t("navigation.content.article"), path: "/article" },
-  //   { label: t("navigation.content.blogroll"), path: "/blogroll" },
-  //   { label: t("navigation.content.about"), path: "/about" },
-  // ];
-
   return (
     <>
       <header id="horizontal-header">
-        <div className="titleArea">
-          <h2>Kamenomi</h2>
+        <div id="navigation-area">
+          <NavLink id="redirect-home" title="返回主页" to="/">
+            <Image
+              isCircle
+              id="navigation-logo"
+              src="./logo-40x40.png"
+              alt="网页徽标"
+            />
+          </NavLink>
+          <NavLink to="link_exchange" title="友情链接">
+            <BiLinkAlt />
+          </NavLink>
+          <NavLink to="about" title="关于本页">
+            <BiInfoCircle />
+          </NavLink>
         </div>
-        <form className="searchArea" action="/search">
-          <Edit
-            id="searchInput"
-            name="target"
-            title="键入所想寻求的内容"
-            buttonProps={{
-              icon: <SlMagnifier />,
-              type: "submit"
-            }}
-          />
-        </form>
-        <div className="toolArea">开发当中</div>
+        <div id="tool-area">
+          <NavLink to="https://github.com/kamenomi-dev/Kamen-s-Intro">
+            <BiLogoGithub />
+          </NavLink>
+        </div>
       </header>
-      <nav id="vertical-sidebar"></nav>
       <div id="content">
         <Outlet />
-        123
       </div>
+      <footer>123</footer>
     </>
   );
 };

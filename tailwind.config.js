@@ -1,9 +1,23 @@
-import loadingSymbol from "./tailwindcss/loadingSymbol.json";
+// import loadingSymbol from "./tailwindcss/loadingSymbol.json";
+import plugin from "tailwindcss/plugin";
+import { withTV } from "tailwind-variants/transformer";
 
 /** @type {import('tailwindcss').Config} */
 
-export default {
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+export default withTV({
+  content: ["./index.html", "./src/**/*.tsx", "./src/components/**/*.tsx"],
+  plugins: [
+    plugin(({addBase}) => {
+      addBase({
+        ".font-segoe": {
+          fontFamily: "Segoe UI Veriable Display, Segoe UI Veriable, Text Segoe UI"
+        },
+        ".font-segoe-small": {
+          fontFamily: "Segoe UI Veriable Small, Segoe UI Veriable Text, Segoe UI"
+        }
+      });
+    })
+  ],
   theme: {
     extend: {
       colors: {
@@ -26,8 +40,7 @@ export default {
           90: "#E2E3E0",
         },
       },
-      ...loadingSymbol
+      // ...loadingSymbol
     },
   },
-  plugins: [],
-};
+});

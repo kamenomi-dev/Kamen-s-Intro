@@ -4,15 +4,35 @@ import { RouterProvider, createBrowserRouter } from "react-router";
 
 import "./utils/internationalization";
 
+import "./styles/root.sass";
+
 import { Frame } from "./frame";
 // import { Home, About, Error, Contact, Blogroll, OriginalCharacter } from "./pages";
-
-import "./styles/root.sass";
+import { Home, About, Error, OcState, LinkExchange } from "./pages";
 
 const routers = createBrowserRouter([
   {
     path: "/",
     element: <Frame />,
+    errorElement: <Error />,
+    children: [
+      {
+        index: true,
+        element: <Home />
+      },
+      {
+        path: "/about",
+        element: <About />
+      },
+      {
+        path: "/oc_state",
+        element: <OcState />
+      },
+      {
+        path: "/link_exchange",
+        element: <LinkExchange />
+      }
+    ]
     // errorElement: <Error />,
     // children: [
     //   {
