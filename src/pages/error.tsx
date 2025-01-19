@@ -23,6 +23,7 @@ export const Error: React.FunctionComponent = () => {
         <textarea
           title="error info"
           disabled
+          // @ts-ignore
           value={beautify(error, null, 4)}
           className="absolute top-12 w-full bottom-0"
         ></textarea>
