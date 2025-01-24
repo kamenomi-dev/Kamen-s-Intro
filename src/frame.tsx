@@ -34,7 +34,11 @@ export const Frame: React.FunctionComponent = () => {
       <div id="content">
         <Outlet />
       </div>
-      <footer>123</footer>
+      <footer>
+        <span>
+          contact@kamen-dev.cv
+        </span>
+      </footer>
     </>
   );
 };
