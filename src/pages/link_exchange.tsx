@@ -28,18 +28,17 @@ export const LinkExchange: React.FunctionComponent = () => {
 
   React.useEffect(() => {
     axios
-      .get("http://api.kamen-dev.cv/blogroll/query")
+      .get("https://api.kamen-dev.cv/blogroll/query")
       .then((data) => {
-        setDataList(data.data.data); // I dont know why
+        setDataList(data.data.data); // check here.
         invalidateQuery(false);
       })
       .catch((error) => {
-        setDataList(error as any); // bad convert
+        setDataList(error as any);
         invalidateQuery(true);
       });
   }, []);
 
-  console.log(isQueryFailed, dataList?.results);
   const isShowEmpty = isQueryFailed || dataList?.results?.length === 0;
   const blogrollItems = dataList?.results;
 
