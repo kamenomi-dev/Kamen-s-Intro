@@ -55,18 +55,22 @@ export const LinkExchange: React.FunctionComponent = () => {
 
   return (
     <div id="blogrollContent">
-      {!isEmpty ? (
-        <div id="blogrollList">
-          {blogrollItems?.map((item) => (
-            <Link
-              title={item.name}
-              description={item.mail}
-              url={item.link}
-              favicon={item.favicon}
-            />
-          ))}
-        </div>
-      ) : _.isUndefined(isEmpty) ? (
+      {!isQueryFailed ? (
+        !isEmpty ? (
+          <div id="blogrollList">
+            {blogrollItems?.map((item) => (
+              <Link
+                title={item.name}
+                description={item.mail}
+                url={item.link}
+                favicon={item.favicon}
+              />
+            ))}
+          </div>
+        ) : (
+          <>目前本网站尚未有友链加入，就差你了~</>
+        )
+      ) : _.isUndefined(isQueryFailed) ? (
         <>正在加载请等候。</>
       ) : (
         <>Failed to query info. </>
