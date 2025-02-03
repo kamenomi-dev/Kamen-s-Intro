@@ -7,16 +7,20 @@ import autoprefixer from "autoprefixer";
 import compression from "vite-plugin-compression";
 import tsconfigPaths from "vite-tsconfig-paths";
 
-const developmentConfig = {
-  server: {
-    host: "0.0.0.0",
-    port: 2025,
-    https: {
-      key: fileSystem.readFileSync("debug_cert/_cert_key.pem"),
-      cert: fileSystem.readFileSync("debug_cert/_cert.pem"),
-    },
-  },
-} satisfies UserConfig;
+const IS_DEV_ENVIRONMENT = process.env.NODE_ENV?.includes("development");
+
+const developmentConfig = IS_DEV_ENVIRONMENT
+  ? ({
+      server: {
+        host: "0.0.0.0",
+        port: 2025,
+        https: {
+          key: fileSystem.readFileSync("debug_cert/_cert_key.pem"),
+          cert: fileSystem.readFileSync("debug_cert/_cert.pem"),
+        },
+      },
+    } satisfies UserConfig)
+  : {};
 
 const baseConfig = {
   plugins: [
@@ -53,7 +57,7 @@ const baseConfig = {
 } satisfies UserConfig;
 
 var combinedConfig = baseConfig;
-if (process.env.NODE_ENV?.includes("development")) {
+if (IS_DEV_ENVIRONMENT) {
   Object.assign(combinedConfig, developmentConfig);
 }
 // https://vitejs.dev/config/
