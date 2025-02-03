@@ -1,5 +1,5 @@
 /// <reference path="./vite-env.d.ts"/>
-import React, { lazy } from "react";
+import React from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router";
 
