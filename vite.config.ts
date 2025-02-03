@@ -1,13 +1,24 @@
-import { defineConfig } from "vite";
+import fileSystem from "node:fs";
+
+import { defineConfig, UserConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import tailwindcss from "tailwindcss";
 import autoprefixer from "autoprefixer";
 import compression from "vite-plugin-compression";
 import tsconfigPaths from "vite-tsconfig-paths";
 
-// https://vitejs.dev/config/
-export default defineConfig({
-  mode: "development",
+const developmentConfig = {
+  server: {
+    host: "0.0.0.0",
+    port: 2025,
+    https: {
+      key: fileSystem.readFileSync("debug_cert/_cert_key.pem"),
+      cert: fileSystem.readFileSync("debug_cert/_cert.pem"),
+    },
+  },
+} satisfies UserConfig;
+
+const baseConfig = {
   plugins: [
     compression({
       verbose: true,
@@ -32,11 +43,18 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       sass: {
-        api: "modern-compiler" 
-      }
+        api: "modern-compiler",
+      },
     },
     postcss: {
       plugins: [tailwindcss(), autoprefixer()],
     },
   },
-});
+} satisfies UserConfig;
+
+var combinedConfig = baseConfig;
+if (process.env.NODE_ENV?.includes("development")) {
+  Object.assign(combinedConfig, developmentConfig);
+}
+// https://vitejs.dev/config/
+export default defineConfig(combinedConfig);

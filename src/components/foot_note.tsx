@@ -7,9 +7,9 @@ const StylizeFootNote = tv({
   ]
 });
 
-interface IStylizedFootNoteProps extends VariantProps<typeof StylizeFootNote> {}
+interface IFootNoteRenderableProps extends VariantProps<typeof StylizeFootNote> {}
 
-interface IFootNoteProps extends IStylizedFootNoteProps {
+interface IFootNoteProps extends IFootNoteRenderableProps {
   children?: React.ReactNode | undefined;
 }
 

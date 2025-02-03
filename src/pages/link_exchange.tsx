@@ -1,36 +1,47 @@
 import React from "react";
 
+import _ from "lodash";
 import axios from "axios";
 
+import { Link } from "../components";
+
+import "./styles/link_exchange.sass";
+
 interface IBlogrollQueryResult {
-  counts: {
-    all: number;
-    current: {
-      page: number;
-      size: number;
+  status: number;
+  data: {
+    counts: {
+      all: number;
+      current: {
+        page: number;
+        size: number;
+      };
     };
+    results: {
+      idx: number;
+      mail: string;
+      name: string;
+      link: string;
+      favicon: string;
+      is_apply?: number;
+      is_unsuited?: number;
+    }[];
   };
-  results: {
-    idx: number;
-    mail: string;
-    name: string;
-    link: string;
-    is_apply?: number;
-    is_unsuited?: number;
-  }[];
 }
 
 export const LinkExchange: React.FunctionComponent = () => {
-  const [isQueryFailed, invalidateQuery] = React.useState<boolean>(false);
+  const [isQueryFailed, invalidateQuery] = React.useState<boolean | undefined>(
+    undefined
+  );
   const [dataList, setDataList] = React.useState<
     IBlogrollQueryResult | undefined
   >();
 
   React.useEffect(() => {
     axios
-      .get("https://api.kamen-dev.cv/blogroll/query")
+      .get(`${API_URL}/blogroll/query`)
       .then((data) => {
-        setDataList(data.data.data); // check here.
+        setDataList(data.data); // check here.
         invalidateQuery(false);
       })
       .catch((error) => {
@@ -39,17 +50,29 @@ export const LinkExchange: React.FunctionComponent = () => {
       });
   }, []);
 
-  const isShowEmpty = isQueryFailed || dataList?.results?.length === 0;
-  const blogrollItems = dataList?.results;
+  const isEmpty = isQueryFailed || dataList?.data?.results?.length === 0;
+  const blogrollItems = dataList?.data?.results;
 
   return (
-    <>
-      {isShowEmpty && "暂无数据！"}
-      <ul>
-        {blogrollItems?.map((item) => (
-          <li>{item.idx}</li>
-        ))}
-      </ul>
-    </>
+    <div id="blogrollContent">
+      {!isEmpty ? (
+        <div id="blogrollList">
+          {blogrollItems?.map((item) => (
+            <Link
+              title={item.name}
+              description={item.mail}
+              url={item.link}
+              favicon={item.favicon}
+            />
+          ))}
+        </div>
+      ) : _.isUndefined(isEmpty) ? (
+        <>正在加载请等候。</>
+      ) : (
+        <>Failed to query info. </>
+      )}
+    </div>
   );
 };
+
+export const Component = LinkExchange;

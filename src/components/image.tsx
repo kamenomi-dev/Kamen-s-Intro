@@ -18,9 +18,9 @@ export const StylizeImage = tv({
   },
 });
 
-interface IStylizedImageProps extends VariantProps<typeof StylizeImage> {}
+interface IImageRenderableProps extends VariantProps<typeof StylizeImage> {}
 
-interface IImageProps extends IStylizedImageProps {
+interface IImageProps extends IImageRenderableProps {
   id?: string| undefined;
   className?: string| undefined;
   alt?: string | undefined;

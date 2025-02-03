@@ -25,3 +25,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# no subimit the debug
+debug_cert/*
