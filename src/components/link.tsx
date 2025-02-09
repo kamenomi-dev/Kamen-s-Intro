@@ -1,77 +1,86 @@
 import { tv, VariantProps } from "tailwind-variants";
-import "./styles/link.sass";
 
-export const StylizeLinkFrame = tv({
-  base: ["bg-gray-20", "rounded-lg my-2", "inline-block w-full h-16"],
-
+export const LinkFrame = tv({
+  base: "bg-gray-20 rounded-lg inline-block w-full h-16",
   variants: {
     variant: {
-      simplied: undefined,
-    },
-  },
+      simplified: null
+    }
+  }
 });
 
-export const StylizeLinkLogo = tv({
-  base: ["inline-block [>*]:aspect-square"],
-
+export const LinkLogo = tv({
+  base: "inline-block [&>*]:aspect-square",
   variants: {
     variant: {
-      simplied: "hidden",
-    },
-  },
+      simplified: "hidden"
+    }
+  }
 });
 
-export const StylizeLinkDescription = tv({
-  base: [
-    "inline-block align-top relative top-0 mx-2",
-    "[&>*:not(:first-child)]:text-gray-35",
-  ],
-
+export const LinkContent = tv({
+  base: "inline-block align-top mx-2 [&>*:not(:first-child)]:text-gray-35",
   variants: {
     variant: {
-      simplied: "hidden",
-    },
-  },
+      simplified: "hidden"
+    }
+  }
 });
 
-// -
+export type LinkVariantProps = VariantProps<typeof LinkFrame>;
 
-export interface ILinkRenderableProps
-  extends VariantProps<typeof StylizeLinkFrame> {}
-
-export interface ILinkProps extends ILinkRenderableProps {
+export interface LinkProps extends LinkVariantProps {
   url: string;
   title?: string;
   favicon?: string;
   description?: string;
-
-  /**
-   * @deprecated please use `description` instead.
-   */
+  
+  /** @deprecated 使用 description 替代 */
   alt?: string;
 }
 
-// -
+export const Link: React.FunctionComponent<LinkProps> = ({
+  variant,
+  url,
+  title,
+  favicon,
+  description,
+  alt
+}) => {
+  const displayTitle = title || new URL(url).hostname;
+  const displayDescription = description || alt || "";
 
-export const Link: React.FunctionComponent<ILinkProps> = (props) => {
-  const { url, favicon } = props;
-  const title = props.title || url;
-  const description = props.description || props.alt || "";
+  if (import.meta.env.DEV && alt) {
+    console.warn('Link组件: alt 属性已弃用，请使用 description 替代')
+  }
 
   return (
-    <a href={url} className={StylizeLinkFrame()}>
-      {!!favicon && (
-        <div className={StylizeLinkLogo(props)}>
-          <img src={favicon} alt={props.title} />
+    <a
+      href={url}
+      className={LinkFrame({ variant })}
+      aria-label={displayTitle}
+    >
+      {favicon && (
+        <div className={LinkLogo({ variant })}>
+          <img 
+            src={favicon} 
+            alt={displayTitle} 
+            loading="lazy"
+            className="w-auto h-full"
+          />
         </div>
       )}
-      <div className={StylizeLinkDescription(props)}>
-        <span>{title}</span>
-        <br />
-        <span>{description}</span>
+      <div className={LinkContent({ variant })}>
+        <span className="block font-medium line-clamp-1">{displayTitle}</span>
+        {displayDescription && (
+          <span className="block text-sm line-clamp-1">
+            {displayDescription}
+          </span>
+        )}
       </div>
     </a>
   );
 };
 
+// 保持原有 displayName 不变
 Link.displayName = "Component-Link";

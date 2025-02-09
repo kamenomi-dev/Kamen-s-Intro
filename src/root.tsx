@@ -1,10 +1,13 @@
 /// <reference path="./vite-env.d.ts"/>
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { QueryClientProvider, QueryClient } from "react-query";
 import { RouterProvider, createBrowserRouter } from "react-router";
 
+import axios from "axios";
+
 if (import.meta.env.DEV) {
-  window.API_URL = "https://192.168.10.7:2026";
+  window.API_URL = "https://api.local.kamen-dev.cv:2026";
 } else {
   window.API_URL = "https://api.kamen-dev.cv";
 }
@@ -15,12 +18,11 @@ import "./styles/root.sass";
 import { Frame } from "./frame";
 import { Home, About, Error, OcState, LinkExchange } from "./pages";
 
-const routers = createBrowserRouter([
+const browserRouter = createBrowserRouter([
   {
     path: "/",
     element: <Frame />,
     errorElement: <Error />,
-    // hydrateFallbackElement: "加载中。", Wired
     children: [
       {
         index: true,
@@ -36,16 +38,33 @@ const routers = createBrowserRouter([
       },
       {
         path: "/link_exchange",
-        element:<LinkExchange />,
+        element: <LinkExchange />,
       },
     ],
   },
 ]);
 
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      retry: (failureCount, error) => {
+        if (axios.isAxiosError(error) && error.response?.status === 404) {
+          return false;
+        }
+
+        return failureCount < 2;
+      },
+    },
+  },
+});
+
 const root = ReactDOM.createRoot(document.getElementById("app")!);
 
 root.render(
   <React.StrictMode>
-    <RouterProvider router={routers} />
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={browserRouter} />
+    </QueryClientProvider>
   </React.StrictMode>
 );

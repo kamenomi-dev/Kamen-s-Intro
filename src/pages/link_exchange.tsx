@@ -1,11 +1,14 @@
 import React from "react";
+import { useQuery } from "react-query";
+import { BiAddToQueue } from "react-icons/bi";
 
-import _ from "lodash";
 import axios from "axios";
 
-import { Link } from "../components";
+import { Button, ErrorDialog, Link } from "../components";
+import { useFrameContext } from "../frame";
 
 import "./styles/link_exchange.sass";
+import { LinkExchangeDialog } from "./dialogs/link_exchange.dialog";
 
 interface IBlogrollQueryResult {
   status: number;
@@ -30,53 +33,88 @@ interface IBlogrollQueryResult {
 }
 
 export const LinkExchange: React.FunctionComponent = () => {
-  const [isQueryFailed, invalidateQuery] = React.useState<boolean | undefined>(
-    undefined
-  );
-  const [dataList, setDataList] = React.useState<
-    IBlogrollQueryResult | undefined
-  >();
+  const frameContext = useFrameContext();
 
+  // Add tabs to toolkits.
+
+  const [isSlideOut, setSlideOut] = React.useState<boolean>(true);
+
+  const toolKey = "Apply-Blogroll";
   React.useEffect(() => {
-    axios
-      .get(`${API_URL}/blogroll/query`)
-      .then((data) => {
-        setDataList(data.data); // check here.
-        invalidateQuery(false);
-      })
-      .catch((error) => {
-        setDataList(error as any);
-        invalidateQuery(true);
+    frameContext.AddToolKits(
+      <Button
+        key={toolKey}
+        title="申请友情链接"
+        aria-label="申请友情链接"
+        size="sm"
+        icon={
+          <BiAddToQueue
+            key={toolKey}
+            onClick={() => setSlideOut(!isSlideOut)}
+          />
+        }
+        circle
+        noResponsive
+      />
+    );
+
+    return () => {
+      frameContext.RemoveToolKits?.(toolKey);
+    };
+  }, [frameContext, toolKey]);
+
+  // Query from api.
+
+  const {
+    data: queryData,
+    isLoading,
+    isError,
+    error,
+  } = useQuery<IBlogrollQueryResult, Error>(
+    ["blogroll"], // 查询键
+    async ({ signal }) => {
+      // @ts-ignore 为什么类型不匹配，而且它还有 `signal?: GenericAbortSignal` ？
+      const response = await axios.get(`${API_URL}/blogroll/query`, {
+        signal,
       });
-  }, []);
 
-  const isEmpty = isQueryFailed || dataList?.data?.results?.length === 0;
-  const blogrollItems = dataList?.data?.results;
+      return response.data;
+    },
+    {
+      retry: 2,
+      staleTime: 5 * 60 * 1000,
+      refetchOnWindowFocus: false,
+    }
+  );
 
+  const isEmpty = !queryData?.data?.results?.length;
+
+
+  console.log(isSlideOut)
   return (
     <div id="blogrollContent">
-      {!isQueryFailed ? (
-        !isEmpty ? (
-          <div id="blogrollList">
-            {blogrollItems?.map((item) => (
-              <Link
-                title={item.name}
-                description={item.mail}
-                url={item.link}
-                favicon={item.favicon}
-              />
-            ))}
-          </div>
-        ) : (
-          <>目前本网站尚未有友链加入，就差你了~</>
-        )
-      ) : _.isUndefined(isQueryFailed) ? (
-        <>正在加载请等候。</>
+      <LinkExchangeDialog slideOut={isSlideOut} onClose={() => setSlideOut(true)}>
+      Debug dialog
+      </LinkExchangeDialog>
+      {isLoading ? (
+        <>正在加载，请等候。</>
+      ) : isError ? (
+        <ErrorDialog>请求列表失败，原因: {error?.message}</ErrorDialog>
+      ) : isEmpty ? (
+        <>目前本网站尚未有友链加入，就差你了~</>
       ) : (
-        <>Failed to query info. </>
+        <div id="blogrollList">
+          {queryData.data?.results?.map((item) => (
+            <Link
+              key={item.idx}
+              title={item.name}
+              description={item.mail}
+              url={item.link}
+              favicon={item.favicon}
+            />
+          ))}
+        </div>
       )}
     </div>
   );
 };
-
-export const Component = LinkExchange;

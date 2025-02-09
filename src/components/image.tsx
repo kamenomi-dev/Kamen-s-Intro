@@ -8,34 +8,26 @@ export const StylizeImage = tv({
       md: "relative h-10 w-10 min-w-10",
       lg: "relative h-12 w-12 min-w-12",
     },
-    isCircle: {
+    circle: {
       true: "rounded-full aspect-square",
     },
   },
   defaultVariants: {
     size: "md",
-    isCircle: false,
+    circle: false,
   },
 });
 
 interface IImageRenderableProps extends VariantProps<typeof StylizeImage> {}
 
-interface IImageProps extends IImageRenderableProps {
-  id?: string| undefined;
-  className?: string| undefined;
-  alt?: string | undefined;
-  src?: string | undefined;
-  sizes?: string | undefined;
-  srcSet?: string | undefined;
+interface IImageProps extends IImageRenderableProps, React.ComponentPropsWithoutRef<"img"> {}
 
-  onLoad?: React.ReactEventHandler<HTMLImageElement>;
-  onError?: () => void;
-}
-
-export const Image: React.FunctionComponent<IImageProps> = (props) => {
-  let combinedClass = props.className + " " + StylizeImage(props);
-
-  return <img {...props} className={combinedClass}></img>;
+export const Image: React.FunctionComponent<IImageProps> = ({
+  size,
+  circle,
+  ...props
+}) => {
+  return <img {...props} className={StylizeImage({circle,size, className: props?.className})} />;
 };
 
 Image.displayName = "Component-Image";

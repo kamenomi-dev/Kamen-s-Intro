@@ -5,7 +5,10 @@
 @use "tailwindcss/utilities"
 
 *
-  @apply text-white m-0 p-0 transition-all
+  @apply m-0 p-0 transition-all
+
+  :not(svg)
+    @apply text-white
 
 body
   @apply pb-8 bg-gray-15
@@ -16,16 +19,13 @@ header#horizontal-header
   @apply z-10 px-5 py-2 sticky top-0 left-0 right-0 h-14
 
   div
-    @apply leading-10
+    @apply leading-10 gap-2.5
 
     &#navigation-area
       @apply inline-flex relative select-none
 
-    a
-      @apply mx-2.5 relative w-10 h-10 rounded-full
-
-      > svg
-        @apply size-6 m-2
+    a, button
+      @apply inline-flex items-center justify-center relative w-10 h-10 mx-1 rounded-full
 
       &#redirect-home
         @apply mx-3.5

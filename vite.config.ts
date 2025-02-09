@@ -32,7 +32,9 @@ const baseConfig = {
       ext: ".gz",
     }),
     react(),
-    tsconfigPaths(),
+    tsconfigPaths({
+      root: "./"
+    }),
   ],
   build: {
     terserOptions: {

@@ -2,7 +2,7 @@
 
 declare global {
   var API_URL:
-    | readonly "https://192.168.10.7:2026"
+    | readonly "https://api.local.kamen-dev.cv:2026"
     | readonly "https://api.kamen-dev.cv";
 }
 
