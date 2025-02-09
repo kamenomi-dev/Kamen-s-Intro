@@ -45,7 +45,6 @@ export const LinkExchangeDialog: React.FC<DialogProps> = ({
   slideOut,
 
   onClose,
-  onSubmit,
 }) => {
   const [isSlideOut, setSlideOut] =  React.useState<boolean>(true)
 
