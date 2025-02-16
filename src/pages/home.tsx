@@ -5,7 +5,7 @@ export const Home: React.FunctionComponent = () => (
     id="front-page"
     className="
       h-screen
-      bg-[url('./frontpage-bg-image.png')] 
+      bg-[url('./image/frontpage-bg-image.png')] 
       bg-no-repeat 
       bg-[length:auto_100%]
       max-md:bg-center

@@ -64,7 +64,7 @@ export const Frame: React.FunctionComponent = () => {
             <Image
               circle
               id="navigation-logo"
-              src="./logo-40x40.png"
+              src="./image/logo-40x40.png"
               alt="网页徽标"
             />
           </NavLink>

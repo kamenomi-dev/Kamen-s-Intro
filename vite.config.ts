@@ -37,6 +37,7 @@ const baseConfig = {
     }),
   ],
   build: {
+    assetsDir: "./",
     terserOptions: {
       compress: {
         drop_console: true,
