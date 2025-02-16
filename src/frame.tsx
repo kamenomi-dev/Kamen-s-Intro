@@ -77,7 +77,7 @@ export const Frame: React.FunctionComponent = () => {
         </div>
         <div id="tool-area">
           {...toolkitElements}
-          <NavLink to="https://github.com/kamenomi-dev/Kamen-s-Intro">
+          <NavLink to="https://github.com/kamenomi-dev/Kamen-s-Intro" title="项目仓库">
             <BiLogoGithub size="1.5em" />
           </NavLink>
         </div>

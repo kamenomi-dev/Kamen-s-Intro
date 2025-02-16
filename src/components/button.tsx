@@ -52,6 +52,7 @@ export const Button: React.FunctionComponent<IButtonProps> = ({
   return (
     <button
       {...props}
+      
       type="button"
       className={buttonVariants({
         size,

@@ -46,13 +46,14 @@ export const LinkExchange: React.FunctionComponent = () => {
         key={toolKey}
         title="申请友情链接"
         aria-label="申请友情链接"
-        size="sm"
+        onClick={() => setSlideOut(!isSlideOut)}
+
         icon={
           <BiAddToQueue
             key={toolKey}
-            onClick={() => setSlideOut(!isSlideOut)}
           />
         }
+        size="sm"
         circle
         noResponsive
       />

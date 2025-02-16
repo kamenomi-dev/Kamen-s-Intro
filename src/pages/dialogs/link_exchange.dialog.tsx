@@ -9,7 +9,7 @@ const dialogLayout = tv({
   slots: {
     // 根容器
     base: [
-      "z-10 absolute inset-0 h-screen",
+      "z-10 fixed inset-0 h-screen",
       "flex items-center justify-center",
       "bg-gray-20/80 backdrop-blur-sm",
       "transition-all duration-1000 ease-in-out",

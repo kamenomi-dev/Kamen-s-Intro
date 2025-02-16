@@ -3,7 +3,7 @@ import { tv, VariantProps } from "tailwind-variants";
 const StylizeFootNote = tv({
   base: [
     "inline mx-2.5",
-    "text-gray-60 font-segoe-small text-[1.5rem]",
+    "text-gray-80 font-segoe-small text-[1.5rem]",
   ]
 });
 

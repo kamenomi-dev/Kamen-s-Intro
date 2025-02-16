@@ -20,6 +20,10 @@ export default withTV({
   ],
   theme: {
     extend: {
+      fontFamily: {
+        segoe: ["'Segoe UI Veriable Display'","'Segoe UI Veriable'", "'Text Segoe UI'"],
+        "segoe-small": ["'Segoe UI Veriable small'","'Segoe UI Veriable Text'", "'Segoe UI'"]
+      },
       colors: {
         gray: {
           15: "#212122",
