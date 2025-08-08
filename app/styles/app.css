@@ -1,0 +1,35 @@
+@import "tailwindcss";
+@import "tailwindcss/theme";
+@import "tailwindcss/preflight";
+@import "tailwindcss/utilities";
+
+@utility drag-none {
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    user-select: none;
+}
+
+/* Need fixed/absolute */
+@utility center-horizontally {
+    @apply left-1/2 -translate-x-1/2;
+}
+
+/* Need fixed/absolute */
+@utility center-vertically {
+    @apply top-1/2 -translate-y-1/2;
+}
+
+@utility center-hv {
+    @apply top-1/2 left-1/2 -translate-1/2;
+}
+
+* {
+    @apply text-white;
+}
+
+body {
+    @apply bg-[#383838];
+    @apply relative min-h-[200vh];
+}

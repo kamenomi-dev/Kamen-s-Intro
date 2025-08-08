@@ -1,0 +1,30 @@
+@import "tailwindcss";
+@import "tailwindcss/theme";
+@import "tailwindcss/preflight";
+@import "tailwindcss/utilities";
+
+@import "../../styles/app.css";
+
+div#home-part-1 {
+    @apply w-dvw h-dvh;
+
+    > div {
+        @apply rounded-[4rem] relative center-hv w-64 h-64 transition-all
+            hover:bg-neutral-300 hover:w-128;
+
+        > div:nth-child(1) {
+            @apply inline-block rounded-[inherit] h-full w-full transition-all
+                group-hover:w-1/2;
+
+            > img {
+                @apply center-hv;
+            }
+        }
+
+        > div:nth-child(2) {
+            @apply inline-block absolute w-0 h-full right-0
+                text-black opacity-0;
+            @apply duration-500 group-hover:delay-100 group-hover:w-64 group-hover:opacity-100;
+        }
+    }
+}

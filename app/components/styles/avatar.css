@@ -1,0 +1,21 @@
+@import "tailwindcss";
+@import "tailwindcss/theme";
+@import "tailwindcss/preflight";
+@import "tailwindcss/utilities";
+
+img#component-avatar {
+    &.size-small {
+        width: 6.875rem;
+        height: auto;
+    }
+
+    &.size-normal {
+        width: 13.75rem;
+        height: auto;
+    }
+
+    &.size-large {
+        width: 20.625rem;
+        height: auto;
+    }
+}

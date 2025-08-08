@@ -1,0 +1,40 @@
+@import "tailwindcss";
+@import "tailwindcss/theme";
+@import "tailwindcss/preflight";
+@import "tailwindcss/utilities";
+
+@import "./app.css";
+
+div#website-navigator {
+    > div {
+        @apply grid relative w-1/4 h-full justify-around items-center;
+
+        > a {
+            @apply px-3 py-1 relative h-3/4 whitespace-nowrap;
+            @apply hover:bg-[#0000001F];
+            @apply flex items-center justify-center rounded-full;
+
+            & div {
+                    @apply ml-2 text-[.8rem];
+                }
+
+            & * {
+                @apply inline-block relative;
+            }
+        }
+    }
+
+    @apply fixed -bottom-12 w-dvw h-12 bg-[#353434] shadow-[0_-.5rem_1rem_rgba(0,0,0,0.4)] transition-all;
+
+    &:before {
+        @apply text-center content-['▼'] block absolute left-0 -top-8 w-full h-8 transition-all;
+    }
+
+    &:hover {
+        @apply bottom-0 shadow-[0_-.5rem_1rem_rgba(0,0,0,0.1)];
+
+        &:before {
+            @apply opacity-0;
+        }
+    }
+}

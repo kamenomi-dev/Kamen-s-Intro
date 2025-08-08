@@ -1,0 +1,24 @@
+{
+    "include": ["**/*", "**/.server/**/*", "**/.client/**/*", ".react-router/types/**/*"],
+    "compilerOptions": {
+        "lib": ["DOM", "DOM.Iterable", "ESNEXT"],
+        "types": ["node", "vite/client"],
+        "target": "ESNEXT",
+        "module": "ESNEXT",
+        "moduleResolution": "bundler",
+        "jsx": "react-jsx",
+        "rootDirs": [".", "./.react-router/types"],
+        "baseUrl": ".",
+        "paths": {
+            "~/*": ["./app/*"],
+            "styles/*": ["./app/styles/*", "./app/routes/styles/*", "./app/components/styles/*"]
+        },
+        "esModuleInterop": true,
+        "verbatimModuleSyntax": true,
+        "forceConsistentCasingInFileNames": true,
+        "noEmit": true,
+        "resolveJsonModule": true,
+        "skipLibCheck": true,
+        "strict": true
+    }
+}
